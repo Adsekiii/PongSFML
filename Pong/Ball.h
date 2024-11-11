@@ -11,14 +11,12 @@ public:
 	void setBallPosition(sf::Vector2f);
 	void setBallScale(sf::Vector2f);
 	sf::Vector2f getBallPosition();
+	void startBall();
 
 private:
 	sf::Texture texture;
 	sf::Sprite ball;
 	int speed;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		target.draw(this->ball, states);
-	}
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 };

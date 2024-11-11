@@ -11,7 +11,7 @@ Ball::Ball(int speed, sf::Vector2f position, sf::Vector2f scale = sf::Vector2f(1
 	this->ball.setTexture(this->texture);
 	this->ball.setScale(scale);
 	sf::Rect<float> size = this->ball.getGlobalBounds();
-	this->ball.setOrigin(sf::Vector2f(size.width,size.height));
+	this->ball.setOrigin(sf::Vector2f(size.width/2,size.height/2));
 	this->ball.setPosition(position);
 	this->speed = speed;
 }
@@ -30,4 +30,11 @@ void Ball::setBallScale(sf::Vector2f scale)
 sf::Vector2f Ball::getBallPosition() 
 {
 	return this->ball.getPosition();
+}
+void startBall() {
+
+}
+void Ball::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(this->ball, states);
 }

@@ -11,17 +11,15 @@ public:
 	~Paddle();
 
 	void setPaddleSpeed(int&);
-	void setPaddlePosition(sf::Vector2f&);
+	void setPaddlePosition(sf::Vector2f);
 	sf::Vector2f getPaddlePosition();
-	void setPaddleScale(sf::Vector2f&);
+	void setPaddleScale(sf::Vector2f);
+	int getPaddleSpeed();
 
 private:
 	int speed;
 	bool isPlayer1;
 	sf::Sprite paddle;
 	sf::Texture paddleTexture;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		target.draw(this->paddle, states);
-	}
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
