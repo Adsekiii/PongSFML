@@ -15,6 +15,7 @@ Paddle::Paddle(int speed, bool isPlayer1, sf::Vector2f position, sf::Vector2f pa
 	this->paddle.setOrigin(sf::Vector2f(size.width/2, size.height/2));
 	this->paddle.setPosition(position);
 	this->paddle.setScale(paddleScale);
+
 }
 Paddle::~Paddle() {};
 void Paddle::setPaddleSpeed(int &newSpeed) 

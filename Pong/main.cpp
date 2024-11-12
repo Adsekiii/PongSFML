@@ -11,7 +11,7 @@ int main()
 
 	sf::Clock clock;
 
-	sf::Time time;
+	
 	float dt;
 
 	Paddle player1(100, true, sf::Vector2f(64, 300), sf::Vector2f(1.f, 5.f));
@@ -31,20 +31,20 @@ int main()
 		}
 
 
-		time = clock.getElapsedTime();
-		dt = time.asMilliseconds();
+		sf::Time elapsed = clock.restart();
+		dt = elapsed.asSeconds();
 		//This piece of code isn't working I will try to resolve this next time
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
-			player1.setPaddlePosition(sf::Vector2f(player1.getPosition().x, player1.getPosition().y - player1.getPaddleSpeed() * dt));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			player1.setPaddlePosition(sf::Vector2f(player1.getPaddlePosition().x, player1.getPaddlePosition().y - player1.getPaddleSpeed() * dt));
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
-			player1.setPaddlePosition(sf::Vector2f(player1.getPosition().x, player1.getPosition().y + player1.getPaddleSpeed() * dt));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			player1.setPaddlePosition(sf::Vector2f(player1.getPaddlePosition().x, player1.getPaddlePosition().y + player1.getPaddleSpeed() * dt));
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
-			player2.setPaddlePosition(sf::Vector2f(player2.getPosition().x, player2.getPosition().y - player2.getPaddleSpeed() * dt));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			player2.setPaddlePosition(sf::Vector2f(player2.getPaddlePosition().x, player2.getPaddlePosition().y - player2.getPaddleSpeed() * dt));
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::W)) {
-			player2.setPaddlePosition(sf::Vector2f(player2.getPosition().x, player2.getPosition().y + player2.getPaddleSpeed() * dt));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			player2.setPaddlePosition(sf::Vector2f(player2.getPaddlePosition().x, player2.getPaddlePosition().y + player2.getPaddleSpeed() * dt));
 		}
 		
 
@@ -53,8 +53,6 @@ int main()
 		window.draw(player2);
 		window.draw(ball);
 		window.display();
-		
-		clock.restart();
 	}
 
 	return EXIT_SUCCESS;
