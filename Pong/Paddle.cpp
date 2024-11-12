@@ -11,8 +11,9 @@ Paddle::Paddle(int speed, bool isPlayer1, sf::Vector2f position, sf::Vector2f pa
 		std::cout << "File doesn't exist!\n";
 	}
 	this->paddle.setTexture(this->paddleTexture);
-	sf::Rect<float> size = this->paddle.getGlobalBounds();
-	this->paddle.setOrigin(sf::Vector2f(size.width/2, size.height/2));
+	this->paddleBounds = this->paddle.getGlobalBounds();
+	this->originPosition = sf::Vector2f(this->paddleBounds.width / 2, this->paddleBounds.height / 2);
+	this->paddle.setOrigin(this->originPosition);
 	this->paddle.setPosition(position);
 	this->paddle.setScale(paddleScale);
 
@@ -36,6 +37,16 @@ void Paddle::setPaddleScale(sf::Vector2f newScale)
 sf::Vector2f Paddle::getPaddlePosition()
 {
 	return this->paddle.getPosition();
+}
+sf::Rect<float> Paddle::getPaddleBounds() {
+	return this->paddleBounds;
+}
+sf::Vector2f Paddle::getOriginPosition() {
+	return this->originPosition;
+}
+void Paddle::updateOriginPosition() {
+	sf::Rect<float> bounds = this->paddle.getGlobalBounds();
+	this->originPosition = sf::Vector2f(bounds.getPosition().x + bounds.width / 2, bounds.getPosition().y + bounds.height / 2);
 }
 void Paddle::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

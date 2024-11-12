@@ -9,13 +9,14 @@ int main()
 	sf::VideoMode windowSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	sf::RenderWindow window(windowSize, windowTitle);
 
-	sf::Clock clock;
+	sf::Clock deltaTimeClock;
+	sf::Clock startGame;
 
-	
 	float dt;
+	bool alreadyChecked = false;
 
-	Paddle player1(100, true, sf::Vector2f(64, 300), sf::Vector2f(1.f, 5.f));
-	Paddle player2(100, false, sf::Vector2f(736, 300), sf::Vector2f(1.f, 5.f));
+	Paddle player1(150, true, sf::Vector2f(64, 300), sf::Vector2f(1.f, 5.f));
+	Paddle player2(150, false, sf::Vector2f(736, 300), sf::Vector2f(1.f, 5.f));
 
 	Ball ball(100, sf::Vector2f(400.f,300.f), sf::Vector2f(1.f,1.f));
 
@@ -29,25 +30,24 @@ int main()
 				window.close();
 			}
 		}
+		if (startGame.getElapsedTime() > sf::Time(sf::seconds(1)) && !alreadyChecked) {
+			ball.setRandomVelocity();
+			alreadyChecked = !alreadyChecked;
+		}
 
-
-		sf::Time elapsed = clock.restart();
+		sf::Time elapsed = deltaTimeClock.restart();
 		dt = elapsed.asSeconds();
 		//This piece of code isn't working I will try to resolve this next time
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-			player1.setPaddlePosition(sf::Vector2f(player1.getPaddlePosition().x, player1.getPaddlePosition().y - player1.getPaddleSpeed() * dt));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			player1.setPaddlePosition(sf::Vector2f(player1.getPaddlePosition().x, player1.getPaddlePosition().y + player1.getPaddleSpeed() * dt));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			player2.setPaddlePosition(sf::Vector2f(player2.getPaddlePosition().x, player2.getPaddlePosition().y - player2.getPaddleSpeed() * dt));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			player2.setPaddlePosition(sf::Vector2f(player2.getPaddlePosition().x, player2.getPaddlePosition().y + player2.getPaddleSpeed() * dt));
-		}
-		
 
+		Collision player1Collision(&player1, sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+		Collision player2Collision(&player2, sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+		Collision ballCollisions(&ball, sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
+		Collision player1ToBallCollision(player1, &ball);
+		Collision player2ToBallCollision(player2, &ball);
+
+		player1Movement(&player1,dt);
+		player2Movement(&player2,dt);
+		ball.updateBall(dt);
 		window.clear();
 		window.draw(player1);
 		window.draw(player2);
@@ -58,4 +58,19 @@ int main()
 	return EXIT_SUCCESS;
 }
 
-
+void player1Movement(Paddle *player, float dt) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, player->getPaddlePosition().y - player->getPaddleSpeed() * dt));
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, player->getPaddlePosition().y + player->getPaddleSpeed() * dt));
+	}
+}
+void player2Movement(Paddle *player,float dt) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, player->getPaddlePosition().y - player->getPaddleSpeed() * dt));
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, player->getPaddlePosition().y + player->getPaddleSpeed() * dt));
+	}
+}
