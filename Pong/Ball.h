@@ -15,10 +15,11 @@ public:
 	void setRandomVelocity();
 	void setVelocity(sf::Vector2f);
 	void updateBall(float dt);
-	void updateOriginPosition();
 	sf::Vector2f getVelocity();
 	sf::Rect<float> getBallBounds();
 	sf::Vector2f getOriginPosition();
+	void updateOriginPosition();
+
 
 private:
 	sf::Texture texture;
