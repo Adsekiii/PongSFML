@@ -1,6 +1,6 @@
 #include "Ball.h"
 
-Ball::Ball(int speed, sf::Vector2f position, sf::Vector2f scale = sf::Vector2f(1.f,1.f))
+Ball::Ball(int speed, sf::Vector2f position)
 {
 	if (this->texture.loadFromFile("./textures/Ball.png")) {
 		std::cout << "File loaded successfully!\n";
@@ -9,7 +9,6 @@ Ball::Ball(int speed, sf::Vector2f position, sf::Vector2f scale = sf::Vector2f(1
 		std::cout << "File doesn't exist!\n";
 	}
 	this->ball.setTexture(this->texture);
-	this->ball.setScale(scale);
 	this->ballBounds = this->ball.getGlobalBounds();
 	this->originPosition = sf::Vector2f(this->ballBounds.width / 2, this->ballBounds.height / 2);
 	this->ball.setOrigin(this->originPosition);
@@ -24,10 +23,6 @@ Ball::~Ball()
 void Ball::setBallPosition(sf::Vector2f position) 
 {
 	this->ball.setPosition(position);
-}
-void Ball::setBallScale(sf::Vector2f scale)
-{
-	this->ball.setScale(scale);
 }
 sf::Vector2f Ball::getBallPosition() 
 {

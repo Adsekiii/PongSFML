@@ -15,10 +15,10 @@ int main()
 	float dt;
 	bool alreadyChecked = false;
 
-	Paddle player1(150, true, sf::Vector2f(64, 300), sf::Vector2f(1.f, 5.f));
-	Paddle player2(150, false, sf::Vector2f(736, 300), sf::Vector2f(1.f, 5.f));
+	Paddle player1(150, true, sf::Vector2f(64, 300));
+	Paddle player2(150, false, sf::Vector2f(736, 300));
 
-	Ball ball(100, sf::Vector2f(400.f,300.f), sf::Vector2f(1.f,1.f));
+	Ball ball(100, sf::Vector2f(400.f,300.f));
 
 	while (window.isOpen())
 	{

@@ -1,6 +1,6 @@
 #include "Paddle.h"
 
-Paddle::Paddle(int speed, bool isPlayer1, sf::Vector2f position, sf::Vector2f paddleScale = sf::Vector2f(1.f, 3.f))
+Paddle::Paddle(int speed, bool isPlayer1, sf::Vector2f position)
 {
 	this->speed = speed;
 	this->isPlayer1 = isPlayer1;
@@ -15,7 +15,6 @@ Paddle::Paddle(int speed, bool isPlayer1, sf::Vector2f position, sf::Vector2f pa
 	this->originPosition = sf::Vector2f(this->paddleBounds.width / 2, this->paddleBounds.height / 2);
 	this->paddle.setOrigin(this->originPosition);
 	this->paddle.setPosition(position);
-	this->paddle.setScale(paddleScale);
 
 }
 Paddle::~Paddle() {};
@@ -29,10 +28,6 @@ int Paddle::getPaddleSpeed()
 }
 void Paddle::setPaddlePosition(sf::Vector2f paddlePosition) {
 	this->paddle.setPosition(paddlePosition);
-}
-void Paddle::setPaddleScale(sf::Vector2f newScale) 
-{
-	this->paddle.setScale(newScale);
 }
 sf::Vector2f Paddle::getPaddlePosition()
 {

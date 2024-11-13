@@ -8,14 +8,14 @@
 
 class Ball : public sf::Drawable, public sf::Transformable {
 public:
-	Ball(int speed, sf::Vector2f position, sf::Vector2f scale);
+	Ball(int speed, sf::Vector2f position);
 	~Ball();
 	void setBallPosition(sf::Vector2f);
-	void setBallScale(sf::Vector2f);
 	sf::Vector2f getBallPosition();
 	void setRandomVelocity();
 	void setVelocity(sf::Vector2f);
 	void updateBall(float dt);
+	void updateOriginPosition();
 	sf::Vector2f getVelocity();
 	sf::Rect<float> getBallBounds();
 	sf::Vector2f getOriginPosition();

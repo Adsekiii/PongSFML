@@ -24,13 +24,13 @@ Collision::Collision(Paddle *player, sf::Vector2f windowBounds)
 	
 	std::cout << player->getOriginPosition().y<<"\n";
 
-	if (player->getOriginPosition().y - paddleBounds.height/2 * 3 < 0)
+	if (player->getOriginPosition().y - paddleBounds.height/2  < 0)
 	{
-		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x,0+paddleBounds.height*3));
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x,0+paddleBounds.height));
 	}
-	if (player->getOriginPosition().y + paddleBounds.height / 2 * 3 > windowBounds.y) 
+	if (player->getOriginPosition().y + paddleBounds.height / 2  > windowBounds.y) 
 	{
-		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, windowBounds.y - paddleBounds.height*3));
+		player->setPaddlePosition(sf::Vector2f(player->getPaddlePosition().x, windowBounds.y - paddleBounds.height));
 	}
 }
 

@@ -7,13 +7,12 @@
 class Paddle : public sf::Transformable, public sf::Drawable
 {
 public:
-	Paddle(int speed, bool isPlayer1, sf::Vector2f position, sf::Vector2f paddleScale);
+	Paddle(int speed, bool isPlayer1, sf::Vector2f position);
 	~Paddle();
 
 	void setPaddleSpeed(int&);
 	void setPaddlePosition(sf::Vector2f);
 	sf::Vector2f getPaddlePosition();
-	void setPaddleScale(sf::Vector2f);
 	int getPaddleSpeed();
 	sf::Rect<float> getPaddleBounds();
 	sf::Vector2f getOriginPosition();
