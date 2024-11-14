@@ -18,6 +18,9 @@ int main()
 	Paddle player1(150, true, sf::Vector2f(64, 300));
 	Paddle player2(150, false, sf::Vector2f(736, 300));
 
+	Points player1Points(true);
+	Points player2Points(false);
+
 	Ball ball(100, sf::Vector2f(400.f,300.f));
 
 	while (window.isOpen())
@@ -37,13 +40,15 @@ int main()
 
 		sf::Time elapsed = deltaTimeClock.restart();
 		dt = elapsed.asSeconds();
-		//This piece of code isn't working I will try to resolve this next time
 
 		Collision player1Collision(&player1, sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 		Collision player2Collision(&player2, sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-		Collision ballCollisions(&ball, sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
+		Collision ballCollisions(&ball, sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT),&player1Points,&player2Points,&startGame,&alreadyChecked, &player1, &player2);
 		Collision player1ToBallCollision(player1, &ball);
 		Collision player2ToBallCollision(player2, &ball);
+
+		player1Points.updatePoints();
+		player2Points.updatePoints();
 
 		player1Movement(&player1,dt);
 		player2Movement(&player2,dt);
@@ -51,6 +56,8 @@ int main()
 		window.clear();
 		window.draw(player1);
 		window.draw(player2);
+		window.draw(player1Points);
+		window.draw(player2Points);
 		window.draw(ball);
 		window.display();
 	}
